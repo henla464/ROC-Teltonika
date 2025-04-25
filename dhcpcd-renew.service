@@ -3,5 +3,5 @@ Description=Renew DHCP lease for wwan0
 
 [Service]
 Type=oneshot
-ExecStart=dhclient -n wwan0
+ExecStart=dhcpcd -n wwan0
 
