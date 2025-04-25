@@ -1,0 +1,10 @@
+[Unit]
+Description=Renew wwan0 DHCP lease every 30 minutes
+
+[Timer]
+OnCalendar=*-*-* *:0/30:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
