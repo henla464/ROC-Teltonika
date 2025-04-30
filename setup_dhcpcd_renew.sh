@@ -16,6 +16,21 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+# modify the dhcpcd.conf
+# Define the file
+file="/etc/dhcpcd.conf"
+
+# Use sed to insert the lines 5 lines from the end
+# First, calculate total lines and determine insertion point
+total_lines=$(wc -l < "$file")
+insert_line=$((total_lines - 7))  # 8 lines from end = total_lines - 7
+
+# Use sed to insert at the calculated line
+sed -i "${insert_line}i\\
+noarp\\
+noipv6" "$file"
+
+
 # --- Download files from GitHub ---
 echo "Downloading files from GitHub..."
 wget -q "${GITHUB_REPO}/${SERVICE_FILE}" -O "${SYSTEMD_DIR}/${SERVICE_FILE}"
