@@ -2,7 +2,8 @@
 
 # Configuration
 INTERFACE="wwan0"
-LOG_FILE="/var/log/wwan0_network_check.log"
+LOG_DIR="/var/log/wwan0_network"
+LOG_FILE="$LOG_DIR/network_check.log"
 DHCPCD_LOG="/var/log/syslog"  # Or /var/log/dhcpcd.log on some systems
 MAX_LOG_FILES=2               # Number of old logs to keep
 LOG_SIZE_KB=1024              # Rotate when log reaches 1MB

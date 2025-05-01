@@ -1,4 +1,3 @@
-
 wget https://raw.githubusercontent.com/henla464/ROC-Teltonika/main/setup_dhcpcd_renew.sh -O setup_dhcpcd_renew.sh
 sudo chmod ugo+x setup_dhcpcd_renew.sh
 sudo ./setup_dhcpcd_renew.sh
@@ -33,27 +32,5 @@ sudo dhcpcd -n wwan0   # if it is already leased it will only rebind
 can change to this in service file:
 ExecStartPre=dhcpcd -k wwan0
 ExecStart=dhcpcd -n wwan0
-
-
-
-=========
-OLD test
-
-
-wget https://raw.githubusercontent.com/henla464/ROC-Teltonika/main/setup_dhclient_renew.sh -O setup_dhclient_renew.sh
-sudo chmod ugo+x setup_dhclient_renew.sh
-sudo ./setup_dhclient_renew.sh
-
-
-To check when it will be called next time:
-systemctl list-timers | grep dhclient-renew
-
-To check status of the service and timer
-sudo systemctl status dhclient-renew.timer
-sudo systemctl status dhclient-renew
-
-
-============
-
 
 
