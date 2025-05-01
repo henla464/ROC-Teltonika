@@ -1,5 +1,5 @@
 [Unit]
-Description=Renew DHCP lease for wwan0
+Description=Check and release/renew DHCP lease for wwan0
 
 [Service]
 Type=oneshot
