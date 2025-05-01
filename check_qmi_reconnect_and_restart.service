@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/local/bin/check_qmi_reconnect_and_restart.sh
+ExecStart=/home/pi/check_qmi_reconnect_and_restart.sh
 Restart=no
 User=root
 
