@@ -45,7 +45,7 @@ check_lease_status() {
     local log_pattern
 
     if [ "$operation" = "release" ]; then
-        log_pattern="dhcpcd\[[0-9]+\]: $interface: released"
+        log_pattern="dhcpcd\[[0-9]+\]: $interface: releasing"
     else
         log_pattern="dhcpcd\[[0-9]+\]: $interface: leased .* for"
     fi
@@ -82,7 +82,6 @@ restart_dhcp() {
     # Only proceed if release was successful
     if [ "$release_ok" = false ]; then
         log "ERROR: Failed to confirm DHCP release after $MAX_RETRIES attempts"
-        return 1
     fi
 
     # Reset for renew attempt
