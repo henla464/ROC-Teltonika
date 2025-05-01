@@ -8,6 +8,7 @@
 GITHUB_REPO="https://raw.githubusercontent.com/henla464/ROC-Teltonika/main"
 SERVICE_FILE="dhcpcd-renew.service"
 TIMER_FILE="dhcpcd-renew.timer"
+SCRIPT_FILE="network_restart.sh"
 SYSTEMD_DIR="/etc/systemd/system"
 
 # --- Check if running as root ---
@@ -35,6 +36,9 @@ noipv6" "$file"
 echo "Downloading files from GitHub..."
 wget -q "${GITHUB_REPO}/${SERVICE_FILE}" -O "${SYSTEMD_DIR}/${SERVICE_FILE}"
 wget -q "${GITHUB_REPO}/${TIMER_FILE}" -O "${SYSTEMD_DIR}/${TIMER_FILE}"
+wget -q "${GITHUB_REPO}/${SCRIPT_FILE}" -O "/home/pi/${SCRIPT_FILE}"
+
+chmod +x "/home/pi/${SCRIPT_FILE}"
 
 # --- Set correct permissions ---
 chmod 644 "${SYSTEMD_DIR}/${SERVICE_FILE}" "${SYSTEMD_DIR}/${TIMER_FILE}"
