@@ -1,5 +1,5 @@
 [Unit]
-Description=Renew wwan0 DHCP lease every 15 minutes
+Description=Check if wwan0 has lost its routes, and if so release and renew wwan0 DHCP lease. Check every 5 minutes
 
 [Timer]
 OnCalendar=*-*-* *:0/5:00

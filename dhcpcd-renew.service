@@ -3,5 +3,5 @@ Description=Renew DHCP lease for wwan0
 
 [Service]
 Type=oneshot
-ExecStart=/home/pi/network_restart-sh
+ExecStart=/home/pi/network_restart.sh
 
