@@ -4,12 +4,33 @@
 INTERFACE="wwan0"
 LOG_FILE="/var/log/wwan0_network_check.log"
 DHCPCD_LOG="/var/log/syslog"  # Or /var/log/dhcpcd.log on some systems
+MAX_LOG_FILES=2               # Number of old logs to keep
+LOG_SIZE_KB=1024              # Rotate when log reaches 1MB
 MAX_RETRIES=3
 RETRY_DELAY=5
 
 # Create log dir if needed
 mkdir -p "$(dirname "$LOG_FILE")"
 touch "$LOG_FILE"
+
+# Initialize logging system
+init_logging() {
+    mkdir -p "$LOG_DIR"
+    
+    # Rotate logs if needed
+    if [ -f "$LOG_FILE" ]; then
+        current_size=$(du -k "$LOG_FILE" | cut -f1)
+        if [ "$current_size" -ge "$LOG_SIZE_KB" ]; then
+            # Rotate logs (keep N most recent)
+            for ((i=$MAX_LOG_FILES-1; i>=1; i--)); do
+                [ -f "$LOG_FILE.$i" ] && mv "$LOG_FILE.$i" "$LOG_FILE.$((i+1))"
+            done
+            mv "$LOG_FILE" "$LOG_FILE.1"
+        fi
+    fi
+    
+    touch "$LOG_FILE"
+}
 
 # Logger function
 log() {
@@ -89,6 +110,9 @@ restart_dhcp() {
 
     return 0
 }
+
+# Initialize logging
+init_logging
 
 # Main execution
 log "==== Starting network check for $INTERFACE ===="
