@@ -1,6 +1,14 @@
-wget https://raw.githubusercontent.com/henla464/ROC-Teltonika/main/setup_dhcpcd_renew.sh -O setup_dhcpcd_renew.sh
+# dhcpcd check for abnormal routes and do release and renew
+curl -o setup_dhcpcd_renew.sh https://raw.githubusercontent.com/henla464/ROC-Teltonika/main/setup_dhcpcd_renew.sh
 sudo chmod ugo+x setup_dhcpcd_renew.sh
 sudo ./setup_dhcpcd_renew.sh
+
+
+# stop and start qmi_reconnect service if it get stuck
+curl -o setup_check_qmi_reconnect_and_restart.sh https://raw.githubusercontent.com/henla464/ROC-Teltonika/main/setup_check_qmi_reconnect_and_restart.sh
+sudo chmod ugo+x setup_check_qmi_reconnect_and_restart.sh
+sudo ./setup_check_qmi_reconnect_and_restart.sh
+
 
 
 #To check when it will be called next time:
@@ -9,6 +17,16 @@ systemctl list-timers | grep dhcpcd-renew
 #To check status of the service and timer
 sudo systemctl status dhcpcd-renew.timer
 sudo systemctl status dhcpcd-renew
+
+
+#To check when it will be called next time:
+systemctl list-timers | grep check_qmi_reconnect_and_restart
+
+#To check status of the service and timer
+sudo systemctl status check_qmi_reconnect_and_restart.timer
+sudo systemctl status check_qmi_reconnect_and_restart
+
+
 
 =================
 https://www.raspberrypi.com/documentation/computers/config_txt.html#common-options

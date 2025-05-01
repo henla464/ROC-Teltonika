@@ -1,0 +1,10 @@
+[Unit]
+Description=Run qmi_reconnect check every 5 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=5min
+Unit=check_qmi_reconnect_and_restart.service
+
+[Install]
+WantedBy=timers.target

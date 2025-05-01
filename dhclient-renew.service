@@ -1,7 +1,0 @@
-[Unit]
-Description=Renew DHCP lease for wwan0
-
-[Service]
-Type=oneshot
-ExecStart=/sbin/dhclient -v wwan0
-

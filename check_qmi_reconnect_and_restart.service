@@ -1,0 +1,12 @@
+[Unit]
+Description=Check wwan0 routes, ping, and qmi_reconnect logs to restart service if needed
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/check_qmi_reconnect_and_restart.sh
+Restart=no
+User=root
+
+[Install]
+WantedBy=multi-user.target
